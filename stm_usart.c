@@ -28,7 +28,8 @@ void Usart2Init(int baudSpeed)
     uint32_t sampling = (USART2->CR1 & USART_CR1_OVER8) ? 8 : 16;
     uint32_t apb1, mant, tmp, frac;
 
-    apb1 = SystemCoreClock;         //TODO zjistit presne z RCC->CFGR registru deleni
+    // replaced ... apb1 = SystemCoreClock;         //TODO zjistit presne z RCC->CFGR registru deleni
+    apb1 = GetBusClock(busClockAPB1);
 
     mant = apb1 * 25 / (sampling * baudSpeed);  // ve dvacetinachnach
     tmp = mant / 25;
